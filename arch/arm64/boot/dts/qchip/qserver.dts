@@ -1,0 +1,39 @@
+/*
+ * dts file for Hisilicon HiKey Development Board
+ *
+ * Copyright (C) 2015, Hisilicon Ltd.
+ *
+ */
+
+/dts-v1/;
+
+#include "qserver.dtsi"
+
+/ {
+	model = "Qserver Board";
+	compatible = "qchip,qserver";
+
+	aliases {
+		serial0 = &uart0; /* On board UART0 */
+		spi0 = &qspi;
+		mmc0 = &dwmmc0;
+		mmc1 = &sd0;
+		ethernet0 = &gmac0;
+		ethernet1 = &gmac1;
+		ethernet2 = &gmac2;
+		usb0 = &usb0;
+		usb1 = &usb1;
+	};
+
+	chosen {
+		stdout-path = "serial0:115200n8";
+		bootargs = "console=ttyAMA0,115200  kgdboc=ttyAMA0,115200 earlycon=pl011,0x12000000  root=/dev/mmcblk0p3 rw rootwait init=/init blkdevparts=mmcblk0:4M(boot),32M(kernel),2G(rootfs),-";
+		/*root=/dev/mmcblk0p3 rw rootwait init=/sbin/init*/
+	};
+
+	memory@0 {
+		device_type = "memory";
+		reg = <0x0 0x40000000 0x0 0x40000000>;
+	};
+};
+

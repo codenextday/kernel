@@ -1,0 +1,72 @@
+/*
+ * dts file for Hisilicon HiKey Development Board
+ *
+ * Copyright (C) 2015, Hisilicon Ltd.
+ *
+ */
+
+/dts-v1/;
+
+#include "qserver.dtsi"
+
+/ {
+	model = "Qserver Board";
+	compatible = "qchip,qserver";
+
+	aliases {
+		serial0 = &uart0; /* On board UART0 */
+		spi0 = &qspi;
+		mmc0 = &dwmmc0;
+		mmc1 = &sd0;
+		ethernet0 = &gmac0;
+		ethernet1 = &gmac1;
+		ethernet2 = &gmac2;
+	};
+
+	chosen {
+		stdout-path = "serial0:115200n8";
+		bootargs = "console=ttyAMA0,115200  kgdboc=ttyAMA0,115200 earlycon=pl011,0x12000000  rootwait init=/sbin/init";
+	};
+
+	memory@0 {
+		device_type = "memory";
+		reg = <0x0 0x40000000 0x0 0x40000000>;
+	};
+};
+
+&hdlcd {
+	status = "okay";
+	port {
+		hdmi_con: endpoint {
+			remote-endpoint = <&adv7511_out>;
+			arm,pl11x,tft-r0g0b0-pads = <0 8 16>;
+		};
+	};
+
+};
+		
+&i2c0 {
+	status = "okay";
+	adv7511: hdmi-tx@39 {
+		compatible = "adi,adv7511";
+		reg = <0x39>;
+		adi,input-depth = <8>;
+		adi,input-colorspace = "yuv422";
+		adi,input-clock = "1x";
+		adi,input-style = <3>;
+		adi,input-justification = "right";
+		
+		ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			port@0 {
+				reg = <0>;
+				adv7511_out: endpoint {
+					remote-endpoint = <&hdmi_con>;
+				};
+			};
+		};
+
+	};
+};
