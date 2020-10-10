@@ -27,7 +27,7 @@
 
 	chosen {
 		stdout-path = "serial0:115200n8";
-		bootargs = "console=ttyAMA0,115200  kgdboc=ttyAMA0,115200 earlycon=pl011,0x12000000  root=/dev/mmcblk0p3 rw rootwait init=/init blkdevparts=mmcblk0:4M(boot),32M(kernel),2G(rootfs),-";
+		bootargs = "console=ttyAMA0,115200  kgdboc=ttyAMA0,115200 earlycon=pl011,0x12000000  root=/dev/mmcblk0p3 rw rootwait init=/sbin/init blkdevparts=mmcblk0:4M(boot),32M(kernel),3G(rootfs),-";
 		/*root=/dev/mmcblk0p3 rw rootwait init=/sbin/init*/
 	};
 

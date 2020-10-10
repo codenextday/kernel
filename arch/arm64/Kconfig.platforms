@@ -299,4 +299,9 @@ config ARCH_ZYNQMP
 	help
 	  This enables support for Xilinx ZynqMP Family
 
+config ARCH_QCHIP
+	bool "QCHIP Family"
+	help
+	  This enables support for QCHIP Family
+
 endmenu

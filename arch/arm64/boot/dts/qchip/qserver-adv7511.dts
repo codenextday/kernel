@@ -21,11 +21,14 @@
 		ethernet0 = &gmac0;
 		ethernet1 = &gmac1;
 		ethernet2 = &gmac2;
+		usb0 = &usb0;
+		usb1 = &usb1;
 	};
 
 	chosen {
 		stdout-path = "serial0:115200n8";
-		bootargs = "console=ttyAMA0,115200  kgdboc=ttyAMA0,115200 earlycon=pl011,0x12000000  rootwait init=/sbin/init";
+		bootargs = "console=ttyAMA0,115200  kgdboc=ttyAMA0,115200 earlycon=pl011,0x12000000  root=/dev/mmcblk0p3 rw rootwait init=/sbin/init blkdevparts=mmcblk0:4M(boot),32M(kernel),3G(rootfs),-";
+		/*root=/dev/mmcblk0p3 rw rootwait init=/sbin/init*/
 	};
 
 	memory@0 {
